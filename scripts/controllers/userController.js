@@ -1,23 +1,33 @@
-app.controller('loginController', function($scope, $location, APIService){
-	$scope.userLogin = function() {
-		var data = {
-			url: apiUrl+'login.php',
-			inputData: {"username":$scope.userEmail,"password":$scope.userPassword}
-		};
-		APIService.processRequest(data)
-		.success(function(data){
-			localStorage.setItem('authToken', data.access_token);
-			localStorage.setItem('sessionId', data.session_id);
-			$location.path('/home');
-    })
-    .error(function(){
-      $scope.errMsg = 'Invalid UserName and Password.';
-    });
+app.controller('loginController', function($scope, $location, $rootScope, userService){
+  $rootScope.login_status = false;
 
-	}
+  $scope.userLogin = function () {
+
+    var loginData = {
+      "username": $scope.user.userEmail,
+      "password": $scope.user.userPassword
+    };
+
+    userService.userLogin(loginData)
+      .success(function(result) {
+        if (result.status === 'success') {
+
+          localStorage.setItem('authToken', result.access_token);
+          localStorage.setItem('sessionId', result.session_id);
+          $rootScope.login_status = true;
+          
+          $location.path('/home');
+        } else {
+          $scope.errMsg = 'Invalid UserName and Password.';
+        }
+      }).error(function() {
+        $scope.errMsg = 'This service is temporarily not available.';
+      });
+  }
 });
 
-app.controller('logoutController', function($scope,$location){
+app.controller('logoutController', function($scope,$location,$rootScope){
+  $rootScope.login_status = false;
   localStorage.clear();
   $location.path("/");
 });

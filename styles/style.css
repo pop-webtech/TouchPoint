@@ -46,3 +46,51 @@ md-input-container [ng-messages] {
 .md-button.md-primary.md-raised:not([disabled]):hover, .md-button.md-primary.md-fab:not([disabled]):hover {
   background-color: #357DDC;
 }
+
+#toolbar #user-menu .user-button {
+    margin: 0;
+    padding: 0 16px;
+    height: 64px;
+    text-transform: none;
+}
+#toolbar #user-menu {
+    height: 64px;
+    padding: 0;
+}
+md-menu-bar .md-menu {
+    display: inline-block;
+    padding: 0;
+    position: relative;
+}
+#toolbar #user-menu .user-button .username {
+    margin: 0 12px 0 8px;
+}
+md-menu-content._md-menu-bar-menu.md-dense md-menu-item.md-indent>md-icon {
+    position: absolute;
+    padding: 0;
+    width: 24px;
+    left: 24px;
+}
+md-toolbar .md-menu {
+    height: auto;
+    margin: auto;
+    padding: 0;
+}
+.icon-account:before {
+    content: "\e611";
+}
+.icon-logout:before {
+    content: "\e8e3";
+}
+.avatar {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 8px 0 0;
+    border-radius: 50%;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+    color: #FFF;
+}

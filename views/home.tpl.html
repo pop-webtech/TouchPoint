@@ -1,0 +1,156 @@
+<md-card>
+  <md-card-header><md-card-title  style="padding:0"><md-card-title-text><span class="md-headline">Touchpoint</span></md-card-title-text></md-card-title>
+    <md-menu-bar>
+      <md-menu>
+        <button ng-click="$mdOpenMenu()">
+          <div layout="row">
+            <div class="avatar-wrapper"><img md-menu-align-target="" class="avatar" src="img/profile.jpg">
+              <md-icon md-font-icon="" ng-class="vm.userStatus.icon" ng-style="{'color': vm.userStatus.color }" class="icon status s16 material-icons icon-checkbox-marked-circle md-default-theme" aria-hidden="true" style="color: rgb(76, 175, 80);"></md-icon>
+            </div>
+            <span class="username hide show-gt-sm" hide="" show-gt-sm="">Uday</span>
+          </div>
+        </button>
+        <md-menu-content>
+          <md-menu-item>
+            <md-icon md-font-icon="icon-account" class="icon md-font icon-account material-icons md-default-theme" aria-hidden="true"></md-icon>
+            <md-button>My Profile</md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-icon md-font-icon="icon-logout" class="icon md-font icon-logout material-icons md-default-theme" aria-hidden="true"></md-icon>
+            <md-button>Logout</md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-menu-bar>
+  </md-card-header>
+</md-card>
+  <div layout="row" layout-xs="column">
+    <div flex="20"><md-card><md-card-content><md-card-title style="padding:0 0 0 15px">Leave Summary</md-card-title>
+      <md-list>
+        <md-list-item>JAN <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>FEB <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>MAR <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>APR <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>MAY <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>JUN <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>JUL <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>AUG <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>SEP <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>OCT <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>NOV <span flex></span>5<md-divider/></md-list-item>
+        <md-list-item>DEC <span flex></span>5<md-divider/></md-list-item>
+      </md-list>
+    </md-card-content></md-card></div>
+    <div flex>
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Leave Requests">
+          <md-card>
+            <md-list>
+              <md-list-item>
+               <span flex="20">Leave Dates</span>
+               <span flex="40">Subject</span>
+               <span flex="20">Applied By</span>
+               <span flex="20">Applied Date</span>
+               <span>Status</span>
+               <md-divider/>
+             </md-list-item>
+             <md-list-item ng-click="showmore($event,1)">
+               <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+               <span flex="40">Leaving to Home Town</span>
+               <span flex="20">Ravikanth</span>
+               <span flex="20">Jul 30, 216</span>
+               <span>Pending</span>
+               <md-divider/>
+             </md-list-item>
+             <md-list-item ng-click="showmore($event,1)">
+               <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+               <span flex="40">Leaving to Home Town</span>
+               <span flex="20">Ravikanth</span>
+               <span flex="20">Jul 30, 216</span>
+               <span>Pending</span>
+               <md-divider/>
+             </md-list-item>
+             <md-list-item>
+               <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+               <span flex="40">Leaving to Home Town</span>
+               <span flex="20">Ravikanth</span>
+               <span flex="20">Jul 30, 216</span>
+               <span>Pending</span>
+               <md-divider/>
+             </md-list-item>
+             <md-list-item>
+               <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+               <span flex="40">Leaving to Home Town</span>
+               <span flex="20">Ravikanth</span>
+               <span flex="20">Jul 30, 216</span>
+               <span>Pending</span>
+               <md-divider/>
+             </md-list-item>
+             <md-list-item>
+               <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+               <span flex="40">Leaving to Home Town</span>
+               <span flex="20">Ravikanth</span>
+               <span flex="20">Jul 30, 216</span>
+               <span>Pending</span>
+               <md-divider/>
+             </md-list-item>
+             <md-list-item>
+               <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+               <span flex="40">Leaving to Home Town</span>
+               <span flex="20">Ravikanth</span>
+               <span flex="20">Jul 30, 216</span>
+               <span>Pending</span>        
+             </md-list-item>
+           </md-list>
+         </md-card>
+       </md-tab>
+       <md-tab label="My Leaves">
+        <md-card md-theme="red">
+         <md-list>
+          <md-list-item>
+           <span flex="20">Leave Dates</span>
+           <span flex="40">Subject</span>
+           <span flex="20">Applied Date</span>
+           <span>Status</span>
+           <md-divider/>
+         </md-list-item>
+         <md-list-item>
+           <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+           <span flex="40">Leaving to Home Town</span>
+           <span flex="20">Jul 30, 216</span>
+           <span>Pending</span>
+           <md-divider/>          
+         </md-list-item>
+         <md-list-item>
+           <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+           <span flex="40">Leaving to Home Town</span>
+           <span flex="20">Jul 30, 216</span>
+           <span>Pending</span>        
+           <md-divider/>
+         </md-list-item>
+         <md-list-item>
+           <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+           <span flex="40">Leaving to Home Town</span>
+           <span flex="20">Jul 30, 216</span>
+           <span>Pending</span>        
+           <md-divider/>
+         </md-list-item>
+         <md-list-item>
+           <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+           <span flex="40">Leaving to Home Town</span>
+           <span flex="20">Jul 30, 216</span>
+           <span>Pending</span>        
+           <md-divider/>
+         </md-list-item>
+         <md-list-item>
+           <span flex="20">Aug 1, 2016 <br> Aug 2, 2016</span>
+           <span flex="40">Leaving to Home Town</span>
+           <span flex="20">Jul 30, 216</span>
+           <span>Pending</span>        
+         </md-list-item>
+       </md-list>
+     </md-card>
+   </md-tab>
+ </md-tabs>
+</div>
+</div>     
