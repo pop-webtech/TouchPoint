@@ -1,25 +1,30 @@
 <div layout="row" layout-align="center center">
 
     <div class="login">
-      <form name="clientLogin">
+      <form name="userLoginform">
         <md-input-container>
           <!-- Use floating placeholder instead of label -->
           <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
-          <input ng-model="user.userEmail" type="email" placeholder="Email-ID" ng-required="true" name="userEmail">
-          <div ng-messages="clientLogin.userEmail.$error">
-            <div ng-message="required">Your Email is required.</div>
+          <input ng-model="user.userEmail" type="email" placeholder="Email-ID" ng-required="true" name="userEmail" id="userEmail">
+          <div ng-show="userLoginform.$submitted || userLoginform.userEmail.$touched ">
+            <div style="color:red" ng-show="userLoginform.userEmail.$error.required">Your Email is required.</div>
+            <div style="color:red" ng-show="userLoginform.userEmail.$invalid && !userLoginform.userEmail.$error.required">Please enter valid Email.</div>
           </div>
         </md-input-container>
         <md-input-container md-no-float>
           <!-- Use floating placeholder instead of label -->
           <md-icon md-svg-src="img/icons/ic_visibility_24px.svg" class="password"></md-icon>
-          <input ng-model="user.userPassword" type="password" placeholder="Password" ng-required="true" name="userPassword" minlength="5">
-          <div ng-messages="clientLogin.userPassword.$error">
-            <div ng-message="required">Your password is required.</div>
+          <input ng-model="user.userPassword" type="password" placeholder="Password" ng-required="true" name="userPassword" id="userPassword">
+          <div ng-show="userLoginform.$submitted || userLoginform.userPassword.$touched ">
+            <div style="color:red" ng-show="userLoginform.userPassword.$error.required">Your password is required.</div>
+            <!-- <div style="color:red" ng-show="userLoginform.userPassword.$invalid && !userLoginform.userPassword.$error.required">Password should be minimum 5 charecters.</div> -->
           </div>
+          <!-- <div ng-messages="clientLogin.userPassword.$error">
+            <div ng-message="required">Your password is required.</div>
+          </div> -->
         </md-input-container>
-        <div>{{errMsg}}</div>
-        <md-button class="md-raised md-primary" ng-click="userLogin();">Login</md-button>
+        <div style="color:red">{{errMsg}}</div>
+        <md-button class="md-raised md-primary" ng-click="userLogin();" ng-disabled="userLoginform.$invalid || !userLoginform.userEmail || !userLoginform.userPassword" >Login</md-button>
       </form>
     </div>
   </div>

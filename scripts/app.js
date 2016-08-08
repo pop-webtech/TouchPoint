@@ -36,9 +36,7 @@ app.config(function($routeProvider, $mdThemingProvider, $httpProvider){
 });
 
 app.service('userService', function ($http) {
-  
   var apiUrl = 'http://dev.popcornapps.com/touchpoint/api/';
-
   this.userLogin = function(loginData) {
     return $http({
       method  : "POST",

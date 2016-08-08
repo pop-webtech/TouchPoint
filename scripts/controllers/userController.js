@@ -2,8 +2,7 @@ app.controller('loginController', function($scope, $location, $rootScope, userSe
   $rootScope.login_status = false;
 
   $scope.userLogin = function () {
-
-    var loginData = {
+  	var loginData = {
       "username": $scope.user.userEmail,
       "password": $scope.user.userPassword
     };
@@ -11,11 +10,9 @@ app.controller('loginController', function($scope, $location, $rootScope, userSe
     userService.userLogin(loginData)
       .success(function(result) {
         if (result.status === 'success') {
-
-          localStorage.setItem('authToken', result.access_token);
+        	localStorage.setItem('authToken', result.access_token);
           localStorage.setItem('sessionId', result.session_id);
           $rootScope.login_status = true;
-          
           $location.path('/home');
         } else {
           $scope.errMsg = 'Invalid UserName and Password.';
