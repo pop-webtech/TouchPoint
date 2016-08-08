@@ -45,4 +45,30 @@ app.service('userService', function ($http) {
       headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
     });
   };
+
+  this.getLeavesList = function() {
+    return $http({
+      method  : "POST",
+      url     : apiUrl + 'getleavedetails.php',
+      data    : getAccessTokenData(),
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+    });
+  };
+
+  this.getLeavesTypes = function() {
+    return $http({
+      method  : "POST",
+      url     : apiUrl + 'getleavetypes.php',
+      data    : getAccessTokenData(),
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+    });
+  };
+
+  function getAccessTokenData() {
+    return {
+      "access_token": localStorage.getItem('authToken'),
+      "session_id": localStorage.getItem('sessionId')
+    };
+  }
+
 });
