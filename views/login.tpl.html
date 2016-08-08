@@ -1,25 +1,24 @@
 <div layout="row" layout-align="center center">
-
-    <div class="login">
-      <form name="clientLogin">
-        <md-input-container>
-          <!-- Use floating placeholder instead of label -->
-          <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
-          <input ng-model="user.email" type="email" placeholder="Email-ID" ng-required="true" name="userEmail">
-          <div ng-messages="clientLogin.userEmail.$error">
-            <div ng-message="required">Your Email is required.</div>
-          </div>
-        </md-input-container>
-        <md-input-container md-no-float>
-          <!-- Use floating placeholder instead of label -->
-          <md-icon md-svg-src="img/icons/ic_visibility_24px.svg" class="password"></md-icon>
-          <input ng-model="user.password" type="password" placeholder="Password" ng-required="true" name="userPassword" minlength="5">
-          <div ng-messages="clientLogin.userPassword.$error">
-            <div ng-message="required">Your password is required.</div>
-          </div>
-        </md-input-container>
-
-        <md-button class="md-raised md-primary">Login</md-button>
-      </form>
-    </div>
+  <div class="login">
+    <form name="clientLogin">
+      <div>{{errMsg}}</div>
+      <md-input-container>
+        <!-- Use floating placeholder instead of label -->
+        <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+        <input ng-model="userEmail" type="text" placeholder="Email-ID" ng-required="true" name="userEmail">
+        <div ng-messages="clientLogin.userEmail.$error">
+          <div ng-message="required">Your Email is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container md-no-float>
+        <!-- Use floating placeholder instead of label -->
+        <md-icon md-svg-src="img/icons/ic_visibility_24px.svg" class="password"></md-icon>
+        <input ng-model="userPassword" type="password" placeholder="Password" ng-required="true" name="userPassword" minlength="5">
+        <div ng-messages="clientLogin.userPassword.$error">
+          <div ng-message="required">Your password is required.</div>
+        </div>
+      </md-input-container>
+      <md-button class="md-raised md-primary" ng-click="userLogin()">Login</md-button>
+    </form>
   </div>
+</div>
