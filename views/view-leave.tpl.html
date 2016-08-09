@@ -10,28 +10,35 @@
 </md-toolbar>
 <md-dialog-content>
   <div class="md-dialog-content">
-   <p>
-   <P ng-if="leaveData.Employee__r.Employee_Name__c !== undefined">
-      <b>Applied by:</b> {{leaveData.Employee__r.Employee_Name__c}}
-   </P>
-      <b>Status:</b> {{leaveData.Status__c}} 
-   </p>
-   <p>
-      <b>From:</b> {{leaveData.From_Date__c | date:'MMM dd, yyyy'}}
-   </p>
-   <P>
-      <b>To:</b> {{leaveData.To_Date__c | date:'MMM dd, yyyy'}}
-   </P>
-   <p>
-      <b>No of days:</b> {{leaveData.Number_of_days__c}} 
-   </p>
-   <p>
-      <b>Reason:</b>
-   </p>
-   <p>
-      {{leaveData.Reason__c}}
-   </p>
-
+   <md-content ng-if="leaveData.Employee__r.Employee_Name__c !== undefined">
+      <p><b>Applied by</b></p>
+      <p>{{leaveData.Employee__r.Employee_Name__c}}</p>
+      <md-divider></md-divider>
+   </md-content>
+   <md-content>
+      <p><b>Status</b></p>
+      <p>{{leaveData.Status__c}}</p>
+      <md-divider></md-divider>
+   </md-content>
+   <md-content>
+      <p><b>From</b></p>
+      <p>{{leaveData.From_Date__c | date:'MMM dd, yyyy'}}</p>
+      <md-divider></md-divider>
+   </md-content>
+   <md-content>
+      <p><b>To</b></p>
+      <p>{{leaveData.To_Date__c | date:'MMM dd, yyyy'}}</p>
+      <md-divider></md-divider>
+   </md-content>
+   <md-content>
+      <p><b>No of days</b></p>
+      <p>{{leaveData.Number_of_days__c}}</p>
+      <md-divider></md-divider>
+   </md-content>
+   <md-content>
+      <p><b>Reason</b></p>
+      <p>{{leaveData.Reason__c}}</p>
+   </md-content>
   </div>
 </md-dialog-content>
 </md-dialog>

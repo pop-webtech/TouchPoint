@@ -1,0 +1,61 @@
+<md-dialog ng-cloak>
+ <md-toolbar>
+  <div class="md-toolbar-tools">
+   <h2>Profile Details</h2>
+   <span flex></span>
+   <md-button class="md-icon-button" ng-click="cancel()">
+    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+  </md-button>
+</div>
+</md-toolbar>
+<md-dialog-content>
+  <div class="md-dialog-content">
+    <md-content>
+      <p><b>Name</b></p>
+      <p>{{empData.Employee_Name__c}}</p>
+      <md-divider></md-divider>
+      
+      <p><b>Email</b></p>
+      <p>{{empData.Employee_Email__c}}</p>
+      <md-divider></md-divider>
+      
+      <p><b>Mobile Number</b></p>
+      <p>{{empData.Mobile_Number__c}}</p>
+      <p>{{empData.Home_Emergency_Contact__c}}</p>
+      <md-divider></md-divider>
+
+      <p><b>Skype ID</b></p>
+      <p>{{empData.Skype_ID__c}}</p>
+      <md-divider></md-divider>
+
+      <p><b>Skype For Business ID</b></p>
+      <p>{{empData.Skype_For_Business_ID__c}}</p>
+      <md-divider></md-divider>
+
+      <p><b>Department</b></p>
+      <p>{{empData.Department__c}}</p>
+      <md-divider></md-divider>
+
+      <p><b>Designation</b></p>
+      <p>{{empData.Designation__c}}</p>
+      <md-divider></md-divider>
+      
+      <p><b>Blood Group</b></p>
+      <p>{{empData.Blood_Group__c}}</p>
+      <md-divider></md-divider>
+
+      <p><b>Date Of Birth</b></p>
+      <p>{{empData.Date_Of_Birth__c}}</p>
+      <md-divider></md-divider>
+
+      <p><b>Present Address</b></p>
+      <p>{{empData.Present_Address__c}}</p>
+      <md-divider></md-divider>
+
+      <p><b>Reporting To</b></p>
+      <p>{{empData.Reporting_To__r.Employee_Name__c}}</p>
+    </md-content>
+  </div>
+</md-dialog-content>
+</md-dialog>
+

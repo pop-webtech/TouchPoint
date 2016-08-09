@@ -1,12 +1,16 @@
 app.controller('homeController', function($scope, $location, $rootScope, userService, $mdDialog, $mdMedia, $mdSidenav){
 
+  // sidebar nav
   $scope.showMobileMainHeader = true;
-    $scope.openSideNavPanel = function() {
-        $mdSidenav('left').open();
-    };
-    $scope.closeSideNavPanel = function() {
-        $mdSidenav('left').close();
-    };
+  $scope.openSideNavPanel = function() {
+    $mdSidenav('left').open();
+  };
+  $scope.closeSideNavPanel = function() {
+    $mdSidenav('left').close();
+  };
+
+  //get my leaves
+  getLeavesList();
 
 
   // Get employee details
@@ -19,21 +23,23 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
   }).error(function() {
   });
 
-  // Get My Leaves 
-  userService.getLeavesList()
-  .success(function(result) {
-    if (result.status === 'success') {
-      if (!angular.isUndefined(result.details.message)) {
-        $scope.myLeaves = [];
+  function getLeavesList() {
+    // Get My Leaves 
+    userService.getLeavesList()
+    .success(function(result) {
+      if (result.status === 'success') {
+        if (!angular.isUndefined(result.details.message)) {
+          $scope.myLeaves = [];
+        } else {
+          $scope.myLeaves = result.details;
+        }
       } else {
-        $scope.myLeaves = result.details;
       }
-    } else {
-    }
-  }).error(function() {
-  });
+    }).error(function() {
+    });
+  }
 
-  // Get My Leaves 
+  // Get Team Leaves 
   userService.getTeamLeavesList()
   .success(function(result) {
     if (result.status === 'success') {
@@ -48,8 +54,8 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
   }).error(function() {
   });
 
-  $scope.showAdvanced = function(ev) {
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+  $scope.applyLeave = function(ev) {
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
     $mdDialog.show({
       controller: applyLeaveController,
       templateUrl: 'views/apply-leave.tpl.html',
@@ -61,7 +67,6 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
   };
 
   function applyLeaveController($scope, $mdDialog) {
-
     $scope.minDate = new Date();
 
     // Get leave types 
@@ -73,19 +78,36 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
       }
     }).error(function() {
     });
-
+    
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
 
-    $scope.applyLeave = function() {
-      console.log($scope.leave);
-      $mdDialog.hide();
+    $scope.requestLeave = function() {
+      // Apply new leave 
+      userService.applyLeave($scope.leave)
+      .success(function(result) {
+        console.log(result);
+        if (result.status === 'success') {
+          $scope.successMsg = result.details.message;
+          // Reset the form model.
+          $scope.leave = {};
+          // Set back to pristine.
+          $scope.applyLeaveform.$setPristine();
+          // Since Angular 1.3, set back to untouched state.
+          $scope.applyLeaveform.$setUntouched();
+          // $mdDialog.hide();
+          getLeavesList();
+        } else {
+          $scope.errMsg = result.details.message;
+        }
+      }).error(function() {
+      });
     };
   }
 
   $scope.viewLeave = function(ev,leave){
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
     $mdDialog.show({
       locals: {leaveData: leave},
       controller: viewLeaveController,
@@ -97,26 +119,39 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
     });
   }
 
-  function viewLeaveController($scope, leaveData)
-  {
+  function viewLeaveController($scope, leaveData) {
     $scope.leaveData = leaveData;
-    // console.log(leaveData.Employee__r.Employee_Name__c);
-    
+
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
-
   }
+
+  // View Profile
+
+  $scope.viewProfile = function(ev){
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+    $mdDialog.show({
+      locals: {empData: $scope.empData},
+      controller: viewProfileController,
+      templateUrl: 'views/view-profile.tpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      fullscreen: useFullScreen
+    });
+  }
+
+  function viewProfileController($scope, empData) {
+    $scope.empData = empData.Employee__r;
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+  }
+
 
   // user logout menu item clicked
   $scope.userLogout = function () {
     $location.path('/logout');
   }
-});
-
-
-
-
-app.controller('myProfileController', function($scope, $location, $rootScope){
-
 });

@@ -13,15 +13,19 @@
       <form name="applyLeaveform">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Leave Type</label>
-          <md-select ng-model="leave.type">
+          <md-select ng-model="leave.type" ng-required="true" name="type" id="type">
             <md-option ng-repeat="leaveType in leaveTypes" value="{{leaveType.Id}}" >
               {{leaveType.Leave_Type__c}}
             </md-option>
           </md-select>
+
         </md-input-container>
 
         <md-datepicker class="md-block" ng-model="leave.fromDate" md-placeholder="From date" md-min-date="minDate"></md-datepicker>
+
         <md-datepicker class="md-block" ng-model="leave.toDate" md-placeholder="To date" md-min-date="leave.fromDate"></md-datepicker>
+
+
 
         <md-input-container class="md-block">
           <label>Reason</label>
@@ -29,9 +33,11 @@
         </md-input-container>
 
         <div style="color:red">{{errMsg}}</div>
-        <md-button flex="10" class="md-raised md-primary" ng-click="applyLeave();">Apply</md-button>
-      </div>
-    </md-dialog-content>
-  </form>
+        <div style="color:green">{{successMsg}}</div>
+        <md-button class="md-raised md-primary" ng-click="requestLeave();" >Apply</md-button>
+        <!-- <md-button flex="10" class="md-raised md-primary" ng-click="applyLeave();">Apply</md-button> -->
+      </form>
+    </div>
+  </md-dialog-content>
 </md-dialog>
 

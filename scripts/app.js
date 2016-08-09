@@ -1,6 +1,6 @@
 var app = angular.module('touchpoint', ['ngAnimate', 'ngAria', 'ngMaterial','ngMessages','ngRoute']);
 
-app.config(function($routeProvider, $mdThemingProvider, $httpProvider){
+app.config(function($routeProvider, $mdThemingProvider, $httpProvider, $mdDateLocaleProvider){
 
   //Enable cross domain calls
   $httpProvider.defaults.useXDomain = true;
@@ -17,15 +17,43 @@ app.config(function($routeProvider, $mdThemingProvider, $httpProvider){
   .when('/', {
     templateUrl : 'views/login.tpl.html',
     controller : 'loginController',
+    resolve:{
+      "check":function($location,$rootScope){
+        $rootScope.saved = localStorage.getItem('authToken');
+        $rootScope.usrInfo = ($rootScope.saved ===null || $rootScope.saved ==="undefined") ? false : true; 
+        if($rootScope.usrInfo){
+          $location.path('/home');    //redirect user to home.
+          $rootScope.login_status = 1;
+        }
+      }
+    }
   })
 
   .when('/home', {
     templateUrl : 'views/home.tpl.html',
+    resolve:{
+      "check":function($location,$rootScope) {
+        $rootScope.saved = localStorage.getItem('authToken');
+        $rootScope.usrInfo = ($rootScope.saved ===null || $rootScope.saved ==="undefined") ? false : true; 
+        if(!$rootScope.usrInfo) {
+          $location.path('/');    //redirect user to home.
+        }
+      }
+    },
     controller : 'homeController'
   })
 
   .when('/profile', {
     templateUrl : 'views/myProfile.tpl.html',
+    resolve:{
+      "check":function($location,$rootScope) {
+        $rootScope.saved = localStorage.getItem('authToken');
+        $rootScope.usrInfo = ($rootScope.saved ===null || $rootScope.saved ==="undefined") ? false : true; 
+        if(!$rootScope.usrInfo) {
+          $location.path('/');    //redirect user to home.
+        }
+      }
+    },
     controller : 'myProfileController'
   })
 
@@ -85,6 +113,29 @@ app.service('userService', function ($http) {
       data    : getAccessTokenData(),
       headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
     });
+  };
+
+  this.applyLeave = function(leaveData) {
+    console.log(mapApplyLeave(leaveData));
+    return $http({
+      method  : "POST",
+      url     : apiUrl + 'leaverequest.php',
+      data    : mapApplyLeave(leaveData),
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+    });
+  };
+
+  function mapApplyLeave(leaveData) {
+
+    return {
+      "access_token": localStorage.getItem('authToken'),
+      "session_id": localStorage.getItem('sessionId'),
+      "leave_type_id": leaveData.type,
+      "from_date": new Date(leaveData.fromDate).toLocaleDateString(),
+      "to_date": new Date(leaveData.toDate).toLocaleDateString(),
+      "reason": leaveData.reason,
+      "leave_id":""
+    };
   };
 
   function getAccessTokenData() {

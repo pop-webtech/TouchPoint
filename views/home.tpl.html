@@ -1,5 +1,4 @@
 <div layout="row">
-
   <div flex="88">
     <md-toolbar>
       <div class="col s1">
@@ -18,7 +17,7 @@
       <md-toolbar layout="row">
         <div class="md-toolbar-tools">
           <h2>
-            <span>TouchPoint</span>
+            <span>{{empData.Employee__r.Employee_First_Name__c}}</span>
           </h2>
           <span flex></span>
           <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
@@ -29,11 +28,11 @@
       </md-toolbar> 
       <md-content layout-padding="">
         <md-list>
-          <md-list-item>
+          <md-list-item ng-click="viewProfile($event)">
             <md-icon class="md-default-theme" class="material-icons">&#xE87C;</md-icon>
             <p>My Profile</p>
           </md-list-item>
-          <md-list-item ng-click="showAdvanced($event)">
+          <md-list-item ng-click="applyLeave($event)">
             <md-icon class="md-default-theme" class="material-icons">&#xE0C9;</md-icon>
             <p>Apply Leave</p>
           </md-list-item>
