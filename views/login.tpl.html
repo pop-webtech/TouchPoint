@@ -1,37 +1,59 @@
 <div layout="row" flex layout-align="center center">
-
-    <div class="login">
-      <form name="userLoginform">
-        <div class="col s1">
-          <img class="responsive-img" src="img/text-logo.png" style="height:45px">
+  <div class="login">
+      <div class="col s1">
+        <img class="responsive-img" src="img/text-logo.png" style="height:45px">
+      </div>
+      <br>
+    <form name="userLoginform" ng-if="isLogin === true">
+      <md-input-container>
+        <!-- Use floating placeholder instead of label -->
+        <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+        <input ng-model="user.userEmail" type="email" placeholder="Email-ID" ng-required="true" name="userEmail" id="userEmail">
+        <div ng-show="userLoginform.$submitted || userLoginform.userEmail.$touched ">
+          <div style="color:red" ng-show="userLoginform.userEmail.$error.required">Your Email is required.</div>
+          <div style="color:red" ng-show="userLoginform.userEmail.$invalid && !userLoginform.userEmail.$error.required">Please enter valid Email.</div>
         </div>
-        <br>
-        <md-input-container>
-          <!-- Use floating placeholder instead of label -->
-          <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
-          <input ng-model="user.userEmail" type="email" placeholder="Email-ID" ng-required="true" name="userEmail" id="userEmail">
-          <div ng-show="userLoginform.$submitted || userLoginform.userEmail.$touched ">
-            <div style="color:red" ng-show="userLoginform.userEmail.$error.required">Your Email is required.</div>
-            <div style="color:red" ng-show="userLoginform.userEmail.$invalid && !userLoginform.userEmail.$error.required">Please enter valid Email.</div>
-          </div>
-        </md-input-container>
-        <md-input-container md-no-float>
-          <!-- Use floating placeholder instead of label -->
-          <md-icon md-svg-src="img/icons/ic_visibility_24px.svg" class="password"></md-icon>
-          <input ng-model="user.userPassword" type="password" placeholder="Password" ng-required="true" name="userPassword" id="userPassword">
-          <div ng-show="userLoginform.$submitted || userLoginform.userPassword.$touched ">
-            <div style="color:red" ng-show="userLoginform.userPassword.$error.required">Your password is required.</div>
-            <!-- <div style="color:red" ng-show="userLoginform.userPassword.$invalid && !userLoginform.userPassword.$error.required">Password should be minimum 5 charecters.</div> -->
-          </div>
+      </md-input-container>
+      <md-input-container>
+        <!-- Use floating placeholder instead of label -->
+        <md-icon md-svg-src="img/icons/ic_visibility_24px.svg" class="password"></md-icon>
+        <input ng-model="user.userPassword" type="password" placeholder="Password" ng-required="true" name="userPassword" id="userPassword">
+        <div ng-show="userLoginform.$submitted || userLoginform.userPassword.$touched ">
+          <div style="color:red" ng-show="userLoginform.userPassword.$error.required">Your password is required.</div>
+          <!-- <div style="color:red" ng-show="userLoginform.userPassword.$invalid && !userLoginform.userPassword.$error.required">Password should be minimum 5 charecters.</div> -->
+        </div>
           <!-- <div ng-messages="clientLogin.userPassword.$error">
             <div ng-message="required">Your password is required.</div>
           </div> -->
-        </md-input-container>
-        <div style="color:red">{{errMsg}}</div>
-        <div layout="row" layout-sm="column" layout-align="space-around" ng-show="userLoginClicked" class="layout-sm-column layout-align-space-around-stretch layout-row">
-          <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </md-input-container>
+      <div style="color:red">{{errMsg}}</div>
+      <div layout="row" layout-sm="column" layout-align="space-around" ng-show="userLoginClicked" class="layout-sm-column layout-align-space-around-stretch layout-row">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+      <md-button class="md-raised md-primary" ng-click="userLogin();" ng-disabled="userLoginform.$invalid || !userLoginform.userEmail || !userLoginform.userPassword" >Login</md-button>
+      <br>
+      <a ng-click="showForgot(false);">Forgot Password ?</a>
+    </form>
+
+    <form name="userForgotform" ng-if="isLogin === false">
+      <md-input-container>
+        <!-- Use floating placeholder instead of label -->
+        <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+        <input ng-model="forgot.userEmail" type="email" placeholder="Email-ID" ng-required="true" name="userEmail" id="userEmail">
+        <div ng-show="userForgotform.$submitted || userForgotform.userEmail.$touched ">
+          <div style="color:red" ng-show="userForgotform.userEmail.$error.required">Your Email is required.</div>
+          <div style="color:red" ng-show="userForgotform.userEmail.$invalid && !userForgotform.userEmail.$error.required">Please enter valid Email.</div>
         </div>
-        <md-button class="md-raised md-primary" ng-click="userLogin();" ng-disabled="userLoginform.$invalid || !userLoginform.userEmail || !userLoginform.userPassword" >Login</md-button>
-      </form>
-    </div>
+      </md-input-container>
+      
+      <div style="color:red">{{errMsg}}</div>
+      <div style="color:green">{{successMsg}}</div>
+      <div layout="row" layout-sm="column" layout-align="space-around" ng-show="userLoginClicked" class="layout-sm-column layout-align-space-around-stretch layout-row">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+      <md-button class="md-raised md-primary" ng-click="forgotPassword();" ng-disabled="userForgotform.$invalid || !userForgotform.userEmail" >Submit</md-button>
+      <br>
+      <a ng-click="showForgot(true);">Goto Login</a>
+    </form>
   </div>
+</div>

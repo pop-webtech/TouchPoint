@@ -36,6 +36,10 @@
             <md-icon class="md-default-theme" class="material-icons">&#xE0C9;</md-icon>
             <p>Apply Leave</p>
           </md-list-item>
+          <md-list-item ng-click="getHolidays($event)">
+            <md-icon class="md-default-theme" class="material-icons">&#xE878;</md-icon>
+            <p>Holidays</p>
+          </md-list-item>
           <md-list-item ng-click="userLogout();">
             <md-icon class="md-default-theme" class="material-icons">&#xE879;</md-icon>
             <p>Logout</p>
@@ -54,18 +58,18 @@
        <md-list>
         <md-list-item>
          <span flex="20"><b>Leave dates</b></span>
-         <span flex="50"><b>Subject</b></span>
+         <span flex="40"><b>Subject</b></span>
          <span flex="10"><b>No of days</b></span>
-         <span flex="10"><b>Type</b></span>
-         <span flex="10"><b>Status</b></span>
+         <span flex="15"><b>Type</b></span>
+         <span flex="15"><b>Status</b></span>
          <md-divider/>
        </md-list-item>
        <md-list-item ng-repeat="(key, leave) in myLeaves" ng-click="viewLeave($event,leave)" ng-if="myLeaves.length > 0">
          <span flex="20">{{leave.From_Date__c | date:'MMM dd, yyyy'}} <br> {{leave.To_Date__c | date:'MMM dd, yyyy'}}</span>
-         <span flex="50">{{leave.Reason__c | limitTo: 50 }}{{leave.Reason__c.length > 50 ? '...' : ''}}</span>
+         <span flex="40">{{leave.Reason__c | limitTo: 50 }}{{leave.Reason__c.length > 50 ? '...' : ''}}</span>
          <span flex="10">{{leave.Number_of_days__c}}</span>
-         <span flex="10">{{leave.Leave_Type__c}}</span>
-         <span flex="10">{{leave.Status__c}}</span>
+         <span flex="15">{{leave.Leave_Type__c}}</span>
+         <span flex="15">{{leave.Status__c}}</span>
          <md-divider/>          
        </md-list-item>
 

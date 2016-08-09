@@ -79,6 +79,15 @@ app.service('userService', function ($http) {
     });
   };
 
+  this.forgotPassword = function(forgotData) {
+    return $http({
+      method  : "POST",
+      url     : apiUrl + 'forgotpassword.php',
+      data    : forgotData,
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+    });
+  };
+
   this.getLeavesList = function() {
     return $http({
       method  : "POST",
@@ -125,8 +134,16 @@ app.service('userService', function ($http) {
     });
   };
 
-  function mapApplyLeave(leaveData) {
+  this.getHolidays = function() {
+    return $http({
+      method  : "POST",
+      url     : apiUrl + 'getholidayslist.php',
+      data    : getAccessTokenData(),
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+    });
+  };
 
+  function mapApplyLeave(leaveData) {
     return {
       "access_token": localStorage.getItem('authToken'),
       "session_id": localStorage.getItem('sessionId'),

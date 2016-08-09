@@ -1,0 +1,52 @@
+<md-dialog ng-cloak flex>
+ <md-toolbar>
+  <div class="md-toolbar-tools">
+   <h2>Holidays</h2>
+   <span flex></span>
+   <md-button class="md-icon-button" ng-click="cancel()">
+    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+  </md-button>
+</div>
+</md-toolbar>
+<md-dialog-content>
+  <div class="md-dialog-content">
+    <md-tabs md-dynamic-height md-border-bottom>
+    <md-tab label="INDIA">
+        <md-content class="md-padding">
+          <md-list flex>
+            <md-list-item class="md-3-line" ng-repeat="holiday in holidaysList | filter: { Location__c: 'INDIA'}" ng-click="null">
+              <div class="md-list-item-text" layout="row">
+                <span flex="50">
+                  <h3 >{{ holiday.Date__c | date : "MMM d, y"}}</h3>
+                </span>
+                <span flex="50">
+                  <h4>{{ holiday.Name }}</h4>
+                  <p>{{ holiday.Day__c }} <b ng-if = "holiday.Optional__c === true">(Optional)</b></p>
+                </span>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </md-tab>
+      <md-tab label="US">
+        <md-content class="md-padding">
+          <md-list flex>
+            <md-list-item class="md-3-line" ng-repeat="holiday in holidaysList | filter: { Location__c: 'US'}" ng-click="null">
+              <div class="md-list-item-text" layout="row">
+                <span flex="50">
+                  <h3 >{{ holiday.Date__c | date : "MMM d, y"}}</h3>
+                </span>
+                <span flex="50">
+                  <h4>{{ holiday.Name }}</h4>
+                  <p>{{ holiday.Day__c }} <b ng-if = "holiday.Optional__c === true">(Optional)</b></p>
+                </span>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </div>
+</md-dialog-content>
+</md-dialog>
+

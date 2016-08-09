@@ -1,9 +1,13 @@
 app.controller('loginController', function($scope, $location, $rootScope, userService){
+  $rootScope.isLogin = true;
   $rootScope.login_status = false;
   $scope.userLoginClicked = false;
+  $scope.forgot = {};
+  $scope.user = {};
 
   $scope.userLogin = function () {
     $scope.userLoginClicked = true;
+    $scope.errMsg = '';
     var loginData = {
       "username": $scope.user.userEmail,
       "password": $scope.user.userPassword
@@ -19,6 +23,31 @@ app.controller('loginController', function($scope, $location, $rootScope, userSe
         } else {
           $scope.userLoginClicked = false;
           $scope.errMsg = 'Invalid UserName and Password.';
+        }
+      }).error(function() {
+        $scope.userLoginClicked = false;
+        $scope.errMsg = 'This service is temporarily not available.';
+      });
+  }
+
+  $scope.showForgot = function(val) {
+    $rootScope.isLogin = val;
+  };
+
+  $scope.forgotPassword = function () {
+    $scope.userLoginClicked = true;
+    $scope.errMsg = '';
+    var forgotData = {
+      "email_id": $scope.forgot.userEmail
+    };
+
+    userService.forgotPassword(forgotData)
+      .success(function(result) {
+        $scope.userLoginClicked = false;
+        if (result.status === 'success') {
+          $scope.successMsg = result.details.message;
+        } else {
+          $scope.errMsg = 'Invalid Email-ID.';
         }
       }).error(function() {
         $scope.userLoginClicked = false;

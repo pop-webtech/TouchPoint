@@ -149,6 +149,35 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
     };
   }
 
+  // Holidays list
+  $scope.getHolidays = function(ev){
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+    $mdDialog.show({
+      controller: getHolidaysController,
+      templateUrl: 'views/holidays.tpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      fullscreen: useFullScreen
+    });
+  }
+
+  function getHolidaysController($scope) {
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    // Get leave types 
+    userService.getHolidays()
+    .success(function(result) {
+      if (result.status === 'success') {
+        $scope.holidaysList = result.details;
+      } else {
+      }
+    }).error(function() {
+    });
+  }
+
 
   // user logout menu item clicked
   $scope.userLogout = function () {
