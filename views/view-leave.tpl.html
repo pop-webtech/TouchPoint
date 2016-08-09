@@ -1,0 +1,38 @@
+<md-dialog ng-cloak>
+ <md-toolbar>
+  <div class="md-toolbar-tools">
+   <h2>Leave Details</h2>
+   <span flex></span>
+   <md-button class="md-icon-button" ng-click="cancel()">
+    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+ </md-button>
+</div>
+</md-toolbar>
+<md-dialog-content>
+  <div class="md-dialog-content">
+   <p>
+   <P ng-if="leaveData.Employee__r.Employee_Name__c !== undefined">
+      <b>Applied by:</b> {{leaveData.Employee__r.Employee_Name__c}}
+   </P>
+      <b>Status:</b> {{leaveData.Status__c}} 
+   </p>
+   <p>
+      <b>From:</b> {{leaveData.From_Date__c | date:'MMM dd, yyyy'}}
+   </p>
+   <P>
+      <b>To:</b> {{leaveData.To_Date__c | date:'MMM dd, yyyy'}}
+   </P>
+   <p>
+      <b>No of days:</b> {{leaveData.Number_of_days__c}} 
+   </p>
+   <p>
+      <b>Reason:</b>
+   </p>
+   <p>
+      {{leaveData.Reason__c}}
+   </p>
+
+  </div>
+</md-dialog-content>
+</md-dialog>
+

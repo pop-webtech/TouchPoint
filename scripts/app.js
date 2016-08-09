@@ -7,6 +7,11 @@ app.config(function($routeProvider, $mdThemingProvider, $httpProvider){
   //Remove the header containing XMLHttpRequest used to identify ajax call 
   //that would prevent CORS from working
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+  $mdThemingProvider.theme('red')
+    .primaryPalette('purple') // specify primary color, all
+                            // other color intentions will be inherited
+                            // from default
   
   $routeProvider
   .when('/', {
@@ -55,10 +60,28 @@ app.service('userService', function ($http) {
     });
   };
 
+  this.getTeamLeavesList = function() {
+    return $http({
+      method  : "POST",
+      url     : apiUrl + 'getteamleavedetails.php',
+      data    : getAccessTokenData(),
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+    });
+  };
+
   this.getLeavesTypes = function() {
     return $http({
       method  : "POST",
       url     : apiUrl + 'getleavetypes.php',
+      data    : getAccessTokenData(),
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+    });
+  };
+
+  this.getEmployeeDetails = function() {
+    return $http({
+      method  : "POST",
+      url     : apiUrl + 'getemployeedetails.php',
       data    : getAccessTokenData(),
       headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
     });
