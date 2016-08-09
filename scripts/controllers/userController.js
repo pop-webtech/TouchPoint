@@ -37,6 +37,7 @@ app.controller('loginController', function($scope, $location, $rootScope, userSe
   $scope.forgotPassword = function () {
     $scope.userLoginClicked = true;
     $scope.errMsg = '';
+    $scope.successMsg = '';
     var forgotData = {
       "email_id": $scope.forgot.userEmail
     };

@@ -1,3 +1,8 @@
+a {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
 .login {
   margin-top: 2em;
   text-align: center;
