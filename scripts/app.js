@@ -125,11 +125,21 @@ app.service('userService', function ($http) {
   };
 
   this.applyLeave = function(leaveData) {
-    console.log(mapApplyLeave(leaveData));
+    // console.log(mapApplyLeave(leaveData));
     return $http({
       method  : "POST",
       url     : apiUrl + 'leaverequest.php',
       data    : mapApplyLeave(leaveData),
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+    });
+  };
+
+  this.updateLeave = function(leaveData) {
+    console.log(mapUpdateLeave(leaveData));
+    return $http({
+      method  : "POST",
+      url     : apiUrl + 'updateleaverequest.php',
+      data    : mapUpdateLeave(leaveData),
       headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
     });
   };
@@ -152,6 +162,16 @@ app.service('userService', function ($http) {
       "to_date": new Date(leaveData.toDate).toLocaleDateString(),
       "reason": leaveData.reason,
       "leave_id":""
+    };
+  };
+
+  function mapUpdateLeave(leaveData) {
+    return {
+      "access_token": localStorage.getItem('authToken'),
+      "session_id": localStorage.getItem('sessionId'),
+      "emp_leave_id": leaveData.empLeaveId,
+      "status": leaveData.status,
+      "supervisor_reason": leaveData.reason,
     };
   };
 

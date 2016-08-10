@@ -19,6 +19,7 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
     if (result.status === 'success') {
       $scope.empData = result.details;
     } else {
+      // $scope.userLogout();
     }
   }).error(function() {
   });
@@ -34,6 +35,7 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
           $scope.myLeaves = result.details;
         }
       } else {
+        // $scope.userLogout();
       }
     }).error(function() {
     });
@@ -42,6 +44,7 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
   // Get Team Leaves 
   userService.getTeamLeavesList()
   .success(function(result) {
+    console.log(result);
     if (result.status === 'success') {
       if (!angular.isUndefined(result.details.message)) {
         $scope.isSupervisor = result.details.isSupervisor;
@@ -50,6 +53,7 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
         $scope.teamLeaves = result.details;
       }
     } else {
+      // $scope.userLogout();
     }
   }).error(function() {
   });
@@ -75,6 +79,7 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
       if (result.status === 'success') {
         $scope.leaveTypes = result.details;
       } else {
+        // $scope.userLogout();
       }
     }).error(function() {
     });
@@ -121,9 +126,33 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
 
   function viewLeaveController($scope, leaveData) {
     $scope.leaveData = leaveData;
+    $scope.leaveStatus = ['Approved', 'Rejected'];
 
     $scope.cancel = function() {
       $mdDialog.cancel();
+    };
+
+    $scope.updateLeaveRequest = function() {
+      // Update leave 
+      $scope.updateLeave.empLeaveId = $scope.leaveData.Employee__c;
+      userService.updateLeave($scope.updateLeave)
+      .success(function(result) {
+        console.log(result);
+        // if (result.status === 'success') {
+        //   $scope.successMsg = result.details.message;
+        //   // Reset the form model.
+        //   $scope.leave = {};
+        //   // Set back to pristine.
+        //   $scope.applyLeaveform.$setPristine();
+        //   // Since Angular 1.3, set back to untouched state.
+        //   $scope.applyLeaveform.$setUntouched();
+        //   // $mdDialog.hide();
+        //   getLeavesList();
+        // } else {
+        //   $scope.errMsg = result.details.message;
+        // }
+      }).error(function() {
+      });
     };
   }
 
@@ -173,6 +202,7 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
       if (result.status === 'success') {
         $scope.holidaysList = result.details;
       } else {
+        // $scope.userLogout();
       }
     }).error(function() {
     });

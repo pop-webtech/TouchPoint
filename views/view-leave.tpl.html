@@ -1,44 +1,75 @@
 <md-dialog ng-cloak flex>
- <md-toolbar>
-  <div class="md-toolbar-tools">
-   <h2>Leave Details</h2>
-   <span flex></span>
-   <md-button class="md-icon-button" ng-click="cancel()">
-    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
- </md-button>
-</div>
-</md-toolbar>
-<md-dialog-content>
-  <div class="md-dialog-content">
-   <md-content ng-if="leaveData.Employee__r.Employee_Name__c !== undefined">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Leave Details</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+   <div class="md-dialog-content">
+     <md-content ng-if="leaveData.Employee__r.Employee_Name__c !== undefined">
       <p><b>Applied by</b></p>
       <p>{{leaveData.Employee__r.Employee_Name__c}}</p>
       <md-divider></md-divider>
-   </md-content>
-   <md-content>
+    </md-content>
+    <md-content>
       <p><b>Status</b></p>
       <p>{{leaveData.Status__c}}</p>
       <md-divider></md-divider>
-   </md-content>
-   <md-content>
+    </md-content>
+    <md-content>
       <p><b>From</b></p>
       <p>{{leaveData.From_Date__c | date:'MMM dd, yyyy'}}</p>
       <md-divider></md-divider>
-   </md-content>
-   <md-content>
+    </md-content>
+    <md-content>
       <p><b>To</b></p>
       <p>{{leaveData.To_Date__c | date:'MMM dd, yyyy'}}</p>
       <md-divider></md-divider>
-   </md-content>
-   <md-content>
+    </md-content>
+    <md-content>
       <p><b>No of days</b></p>
       <p>{{leaveData.Number_of_days__c}}</p>
       <md-divider></md-divider>
-   </md-content>
-   <md-content>
+    </md-content>
+    <md-content>
       <p><b>Reason</b></p>
       <p>{{leaveData.Reason__c}}</p>
-   </md-content>
+    </md-content>
+    <md-divider></md-divider>
+
+
+    <md-card>
+      <form name="updateLeaveForm">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Status</label>
+          <md-select ng-model="updateLeave.status" required>
+            <md-option ng-repeat="status in leaveStatus" value="{{status}}">
+              {{status}}
+            </md-option>
+            <div ng-messages="updateLeaveForm.status.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-select>
+        </md-input-container>
+
+
+        <md-input-container class="md-block">
+          <label>Reanson</label>
+          <input required md-asterisk name="reason" ng-model="updateLeave.reason">
+          <div ng-messages="updateLeaveForm.reason.$error">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
+          </div>
+        </md-input-container>
+
+        <md-button class="md-raised md-primary" ng-click="updateLeaveRequest();" >Update</md-button>
+
+      </form>
+    </md-card>
   </div>
 </md-dialog-content>
 </md-dialog>
