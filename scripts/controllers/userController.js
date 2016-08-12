@@ -32,6 +32,8 @@ app.controller('loginController', function($scope, $location, $rootScope, userSe
 
   $scope.showForgot = function(val) {
     $rootScope.isLogin = val;
+    $scope.errMsg = '';
+    $scope.successMsg = '';
   };
 
   $scope.forgotPassword = function () {

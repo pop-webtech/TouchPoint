@@ -2,7 +2,9 @@
   <div flex="88">
     <md-toolbar>
       <div class="col s1">
-        <img class="responsive-img" src="img/logo.png" style="height:45px">
+        <div class="logo">
+          <img class="responsive-img" src="img/logo.png">
+        </div>
       </div>
     </md-toolbar>
   </div>
@@ -84,18 +86,16 @@
   <md-card>
     <md-list>
       <md-list-item>
-       <span flex="20"><b>Leave Dates</b></span>
-       <span flex="45"><b>Subject</b></span>
+       <span flex="25"><b>Leave Dates</b></span>
+       <span flex="50"><b>Subject</b></span>
        <span flex="15"><b>Applied By</b></span>
-       <span flex="10"><b>Applied Date</b></span>
        <span flex="10"><b>Status</b></span>
        <md-divider/>
      </md-list-item>
      <md-list-item ng-repeat="(key, leave) in teamLeaves" ng-click="viewLeave($event,leave)" ng-if="teamLeaves.length > 0">
-       <span flex="20">{{leave.From_Date__c | date:'MMM dd, yyyy'}} <br> {{leave.To_Date__c | date:'MMM dd, yyyy'}}</span>
-       <span flex="45">{{leave.Reason__c | limitTo: 50 }}{{leave.Reason__c.length > 50 ? '...' : ''}}</span>
+       <span flex="25">{{leave.From_Date__c | date:'MMM dd, yyyy'}} <br> {{leave.To_Date__c | date:'MMM dd, yyyy'}}</span>
+       <span flex="50">{{leave.Reason__c | limitTo: 50 }}{{leave.Reason__c.length > 50 ? '...' : ''}}</span>
        <span flex="15">{{leave.Employee__r.Employee_Name__c}}</span>
-       <span flex="10">N/A</span>
        <span flex="10">{{leave.Status__c}}</span>
        <md-divider/>
      </md-list-item>

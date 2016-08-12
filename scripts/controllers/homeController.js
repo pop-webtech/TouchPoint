@@ -37,7 +37,9 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
           $scope.myLeaves = result.details;
         }
       } else {
-        if (result.status_code === 400 && result.details.message === 'Invalid session Id') {
+        if (result.status_code === 400 && result.details.message === 'No leaves applied') {
+          $scope.myLeaves = [];
+        } else if (result.status_code === 400 && result.details.message === 'Invalid session Id') {
           $scope.userLogout();
         }
       }

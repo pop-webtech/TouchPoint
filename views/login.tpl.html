@@ -4,7 +4,7 @@
         <img class="responsive-img" src="img/text-logo.png" style="height:45px">
       </div>
       <br>
-    <form name="userLoginform" ng-if="isLogin === true">
+    <form name="userLoginform" ng-if="isLogin === true" ng-submit="userLogin();">
       <md-input-container>
         <!-- Use floating placeholder instead of label -->
         <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
@@ -35,7 +35,7 @@
       <md-button md-no-ink class="md-primary" ng-click="showForgot(false);">Forgot Password ?</md-button>
     </form>
 
-    <form name="userForgotform" ng-if="isLogin === false">
+    <form name="userForgotform" ng-if="isLogin === false" ng-submit="forgotPassword()">
       <md-input-container>
         <!-- Use floating placeholder instead of label -->
         <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>

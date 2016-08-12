@@ -137,3 +137,27 @@ md-dialog.fullscreen-dialog {
     height: 100%;
     border-radius: 0;
 }
+
+.logo{
+  padding: 10px;
+}
+.logo img{
+  max-width: 45px;
+}
+@media screen and (max-width: 960px) {
+  .logo img{
+    max-width: 32px;
+  }  
+}
+.md-button.md-icon-button{
+  margin-top:10px;
+}
+
+body{
+  background-color: #fafafa;
+}
+.login form{
+  background-color: #fff;
+  margin:1em auto;
+  box-shadow: none;
+}
