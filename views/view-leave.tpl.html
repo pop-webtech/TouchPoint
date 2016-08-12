@@ -16,11 +16,6 @@
       <md-divider></md-divider>
     </md-content>
     <md-content>
-      <p><b>Status</b></p>
-      <p>{{leaveData.Status__c}}</p>
-      <md-divider></md-divider>
-    </md-content>
-    <md-content>
       <p><b>From</b></p>
       <p>{{leaveData.From_Date__c | date:'MMM dd, yyyy'}}</p>
       <md-divider></md-divider>
@@ -38,11 +33,22 @@
     <md-content>
       <p><b>Reason</b></p>
       <p>{{leaveData.Reason__c}}</p>
+      <md-divider></md-divider>
     </md-content>
-    <md-divider></md-divider>
+    <md-content>
+      <p><b>Status</b></p>
+      <p>{{leaveData.Status__c}}</p>
+      <md-divider></md-divider>
+    </md-content>
+
+    <md-content ng-if="leaveData.Supervisor_Comments__c">
+      <p><b>Reason</b></p>
+      <p>{{leaveData.Supervisor_Comments__c}}</p>
+    </md-content>
+    <md-divider ng-if="leaveData.Supervisor_Comments__c"></md-divider>
 
 
-    <md-card>
+    <md-card ng-if="leaveData.Employee__r && successMsg === ''">
       <form name="updateLeaveForm">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Status</label>
@@ -65,6 +71,8 @@
             <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
           </div>
         </md-input-container>
+
+        <div style="color:red">{{errMsg}}</div>
 
         <md-button class="md-raised md-primary" ng-click="updateLeaveRequest();" >Update</md-button>
 

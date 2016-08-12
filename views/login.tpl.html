@@ -32,7 +32,7 @@
       </div>
       <md-button class="md-raised md-primary" ng-click="userLogin();" ng-disabled="userLoginform.$invalid || !userLoginform.userEmail || !userLoginform.userPassword" >Login</md-button>
       <br>
-      <a ng-click="showForgot(false);">Forgot Password ?</a>
+      <md-button md-no-ink class="md-primary" ng-click="showForgot(false);">Forgot Password ?</md-button>
     </form>
 
     <form name="userForgotform" ng-if="isLogin === false">
@@ -53,7 +53,7 @@
       </div>
       <md-button class="md-raised md-primary" ng-click="forgotPassword();" ng-disabled="userForgotform.$invalid || !userForgotform.userEmail" >Submit</md-button>
       <br>
-      <a ng-click="showForgot(true);">Goto Login</a>
+      <md-button md-no-ink class="md-primary" ng-click="showForgot(true);">Goto Login</md-button>
     </form>
   </div>
 </div>

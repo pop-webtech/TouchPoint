@@ -1,4 +1,4 @@
-app.controller('homeController', function($scope, $location, $rootScope, userService, $mdDialog, $mdMedia, $mdSidenav){
+app.controller('homeController', function($scope, $location, $rootScope, userService, $mdDialog, $mdMedia, $mdSidenav, $mdToast){
 
   // sidebar nav
   $scope.showMobileMainHeader = true;
@@ -19,7 +19,9 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
     if (result.status === 'success') {
       $scope.empData = result.details;
     } else {
-      // $scope.userLogout();
+      if (result.status_code === 400 && result.details.message === 'Invalid session Id') {
+        $scope.userLogout();
+      }
     }
   }).error(function() {
   });
@@ -35,7 +37,9 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
           $scope.myLeaves = result.details;
         }
       } else {
-        // $scope.userLogout();
+        if (result.status_code === 400 && result.details.message === 'Invalid session Id') {
+          $scope.userLogout();
+        }
       }
     }).error(function() {
     });
@@ -44,16 +48,15 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
   // Get Team Leaves 
   userService.getTeamLeavesList()
   .success(function(result) {
-    console.log(result);
     if (result.status === 'success') {
-      if (!angular.isUndefined(result.details.message)) {
+      $scope.teamLeaves = result.details;
+    } else {
+      if (result.status_code === 400 && result.details.message === 'No leaves applied') {
         $scope.isSupervisor = result.details.isSupervisor;
         $scope.teamLeaves = [];
-      } else {
-        $scope.teamLeaves = result.details;
+      } else if (result.status_code === 400 && result.details.message === 'Invalid session Id') {
+        $scope.userLogout();
       }
-    } else {
-      // $scope.userLogout();
     }
   }).error(function() {
   });
@@ -104,7 +107,11 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
           // $mdDialog.hide();
           getLeavesList();
         } else {
-          $scope.errMsg = result.details.message;
+          if (result.status_code === 400 && result.details.message === 'Invalid session Id') {
+            $scope.userLogout();
+          } else {
+            $scope.errMsg = result.details.message;
+          }
         }
       }).error(function() {
       });
@@ -127,6 +134,9 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
   function viewLeaveController($scope, leaveData) {
     $scope.leaveData = leaveData;
     $scope.leaveStatus = ['Approved', 'Rejected'];
+    $scope.updateLeave = {};
+    $scope.successMsg = '';
+    $scope.errMsg = '';
 
     $scope.cancel = function() {
       $mdDialog.cancel();
@@ -134,23 +144,29 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
 
     $scope.updateLeaveRequest = function() {
       // Update leave 
-      $scope.updateLeave.empLeaveId = $scope.leaveData.Employee__c;
+      $scope.updateLeave.empLeaveId = $scope.leaveData.Id;
       userService.updateLeave($scope.updateLeave)
       .success(function(result) {
-        console.log(result);
-        // if (result.status === 'success') {
-        //   $scope.successMsg = result.details.message;
-        //   // Reset the form model.
-        //   $scope.leave = {};
-        //   // Set back to pristine.
-        //   $scope.applyLeaveform.$setPristine();
-        //   // Since Angular 1.3, set back to untouched state.
-        //   $scope.applyLeaveform.$setUntouched();
-        //   // $mdDialog.hide();
-        //   getLeavesList();
-        // } else {
-        //   $scope.errMsg = result.details.message;
-        // }
+        if (result.status === 'success') {
+          $scope.leaveData.Status__c = $scope.updateLeave.status;
+          $scope.leaveData.Supervisor_Comments__c  = $scope.updateLeave.reason;
+          $scope.successMsg = result.details.message;
+
+
+          $mdToast.show(
+            $mdToast.simple()
+              .textContent(result.details.message)
+              .position('top right')
+              .hideDelay(3000)
+          );
+          getLeavesList();
+        } else {
+          if (result.status_code === 400 && result.details.message === 'Invalid session Id') {
+            $scope.userLogout();
+          } else {
+            $scope.errMsg = result.details.message;
+          }
+        }
       }).error(function() {
       });
     };
@@ -202,7 +218,9 @@ app.controller('homeController', function($scope, $location, $rootScope, userSer
       if (result.status === 'success') {
         $scope.holidaysList = result.details;
       } else {
-        // $scope.userLogout();
+        if (result.status_code === 400 && result.details.message === 'Invalid session Id') {
+          $scope.userLogout();
+        }
       }
     }).error(function() {
     });

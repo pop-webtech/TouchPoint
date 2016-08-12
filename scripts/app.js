@@ -135,7 +135,6 @@ app.service('userService', function ($http) {
   };
 
   this.updateLeave = function(leaveData) {
-    console.log(mapUpdateLeave(leaveData));
     return $http({
       method  : "POST",
       url     : apiUrl + 'updateleaverequest.php',
